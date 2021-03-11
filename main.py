@@ -75,4 +75,11 @@ def window(stdscr):
         stdscr.addstr(ny, nx, cursor_ch)
         y, x = ny, nx
 
+        # paint the (y, x) coordinate the at the center of the screen
+        # there are 2 steps:
+        # - erase the previous painting with white space
+        stdscr.addstr(sh // 2, sw // 2 - 10, ' ' * 10)
+        # - paint the new coordinate.
+        stdscr.addstr(sh // 2, sw // 2 - 10, '({0}, {1})'.format(y, x))
+
 curses.wrapper(window)
