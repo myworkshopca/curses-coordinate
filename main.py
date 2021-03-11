@@ -38,12 +38,15 @@ def window(stdscr):
     # paint the ending ▼ 9660
     stdscr.addstr(sh - 1, 3, chr(9660))
 
+    msg = "Press arrow keys to move around..."
+    stdscr.addstr(sh // 2 - 2, sw // 2 - len(msg) // 2, msg)
+
     cursor_ch = chr(9608)
-    y, x = 0, 0
+    y, x = sh // 2 - 4, sw // 2 
     stdscr.addstr(y, x, cursor_ch)
     # paint the coordinate message.
-    stdscr.addstr(sh // 2, sw // 2 - 15, '(y={0}, x={1})'.format(y, x))
-    ny, nx = 0, 0
+    stdscr.addstr(sh // 2, sw // 2 - 7, '(y={0}, x={1})'.format(y, x))
+    ny, nx = y, x
 
     while True:
 
@@ -80,8 +83,8 @@ def window(stdscr):
         # paint the (y, x) coordinate the at the center of the screen
         # there are 2 steps:
         # - erase the previous painting with white space
-        stdscr.addstr(sh // 2, sw // 2 - 15, ' ' * 15)
+        stdscr.addstr(sh // 2, sw // 2 - 7, ' ' * 15)
         # - paint the new coordinate.
-        stdscr.addstr(sh // 2, sw // 2 - 15, '(y={0}, x={1})'.format(y, x))
+        stdscr.addstr(sh // 2, sw // 2 - 7, '(y={0}, x={1})'.format(y, x))
 
 curses.wrapper(window)
