@@ -40,7 +40,7 @@ def window(stdscr):
 
     msg = "Python curses Coordinate System"
     stdscr.addstr(sh // 2 - 4, sw // 2 - len(msg) // 2, msg)
-    msg = "Press arrow keys to move around ..."
+    msg = "Press arrow keys to move around, Press ESC or q to exit" 
     stdscr.addstr(sh // 2 - 2, sw // 2 - len(msg) // 2, msg)
 
     cursor_ch = chr(9608)
