@@ -14,7 +14,7 @@ def window(stdscr):
     stdscr.addstr(2, 3, "3")
     stdscr.addstr(3, 2, "3")
 
-    # paint the x axis.
+    # paint the x axis scale
     for x in range(4, sw):
         # ─ 9472
         stdscr.addstr(3, x, chr(9472))
@@ -28,6 +28,7 @@ def window(stdscr):
     # paint the ending 9658 - ►
     stdscr.addstr(3, sw - 1, chr(9658))
 
+    # paint the y axis scale
     for y in range(4, sh):
         # │ 9474
         stdscr.addstr(y, 3, chr(9474))
@@ -37,47 +38,41 @@ def window(stdscr):
     # paint the ending ▼ 9660
     stdscr.addstr(sh - 1, 3, chr(9660))
 
+    cursor_ch = chr(9608)
+    y, x = 0, 0
+    stdscr.addstr(y, x, cursor_ch)
+    ny, nx = 0, 0
+
     while True:
-        stdscr.addstr(sh - 10, sw - 50, 'Enter Y axis: ')
-        # user input string.
-        user_i = ''
-        while True:
-            key = stdscr.getch()
-            if key >= 48 and key <= 57:
-                user_i = user_i + chr(key)
-                stdscr.addstr(chr(key))
-            elif key == 10:
-                break
-            else:
-                continue
-        # set the y axis
-        user_y = int(user_i)
 
-        stdscr.addstr(sh - 9, sw - 50, 'Enter X axis: ')
-        # reset the user input string
-        user_i = ''
-        while True:
-            key = stdscr.getch()
-            if key >= 48 and key <= 57:
-                user_i = user_i + chr(key)
-                stdscr.addstr(chr(key))
-            elif key == 10:
-                break
-            else:
-                continue
+        user_key = stdscr.getch()
 
-        # set the y axis
-        user_x = int(user_i)
-
-        # paint the user input.
-        stdscr.addstr(user_y, user_x, "X")
-        key = stdscr.getch()
-        # exit when it is ESC
-        if key == 27:
+        # exit when user press ESC q or Q
+        if user_key in [27, 113, 81]:
             break
-        else:
-            # start over.
-            stdscr.addstr(sh - 10, sw - 50, ' ' * 30)
-            stdscr.addstr(sh - 9, sw - 50, ' ' * 30)
+
+        # decide the new head based on the direction
+        if user_key in [curses.KEY_UP, 107]:
+            # k (107) for up
+            if y > 0:
+                ny = y - 1
+        elif user_key in [curses.KEY_DOWN, 106]:
+            # j (106) for down
+            if y < sh - 1:
+                ny = y + 1
+        elif user_key in [curses.KEY_RIGHT, 108]:
+            # l (108) for right
+            if x < sw - 1:
+                nx = x + 1
+        elif user_key in [curses.KEY_LEFT, 104]:
+            # h (104) for left
+            if x > 0:
+                nx = x - 1
+
+        # erase the previous location by paint the white space.
+        stdscr.addstr(y, x, ' ')
+        # paint the new location.
+        stdscr.addstr(ny, nx, cursor_ch)
+        y, x = ny, nx
 
 curses.wrapper(window)
