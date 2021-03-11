@@ -38,11 +38,13 @@ def window(stdscr):
     # paint the ending ▼ 9660
     stdscr.addstr(sh - 1, 3, chr(9660))
 
-    msg = "Press arrow keys to move around..."
+    msg = "Python curses Coordinate System"
+    stdscr.addstr(sh // 2 - 4, sw // 2 - len(msg) // 2, msg)
+    msg = "Press arrow keys to move around ..."
     stdscr.addstr(sh // 2 - 2, sw // 2 - len(msg) // 2, msg)
 
     cursor_ch = chr(9608)
-    y, x = sh // 2 - 4, sw // 2 
+    y, x = sh // 2 - 6, sw // 2 
     stdscr.addstr(y, x, cursor_ch)
     # paint the coordinate message.
     stdscr.addstr(sh // 2, sw // 2 - 7, '(y={0}, x={1})'.format(y, x))
