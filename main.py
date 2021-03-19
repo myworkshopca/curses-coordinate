@@ -7,10 +7,14 @@ def window(stdscr):
     # get size of the screen.
     sh, sw = stdscr.getmaxyx()
 
-    # ┌ 9484
+    # ┌ 9484 ├ 9500 ┴ 9524 ┬ 9516 
+    # ─ 9472 │ 9474
+    # ► 9658 ▼ 9660
+    # more in page for box drawing unicode
+    # https://unicode-table.com/en/blocks/box-drawing/
     stdscr.addstr(3, 3, chr(9484))
 
-    # paint the
+    # paint the measure mark,
     stdscr.addstr(2, 3, "3")
     stdscr.addstr(3, 2, "3")
 
@@ -25,7 +29,7 @@ def window(stdscr):
             # paint the x axis scale.
             for i in range(0, len(x_str)):
                 stdscr.addstr(3 - 1 - i, x, x_str[len(x_str) - 1 - i])
-    # paint the ending 9658 - ►
+    # paint the ending arrow 9658 - ►
     stdscr.addstr(3, sw - 1, chr(9658))
 
     # paint the y axis scale
@@ -50,6 +54,7 @@ def window(stdscr):
     stdscr.addstr(sh // 2, sw // 2 - 7, '(y={0}, x={1})'.format(y, x))
     ny, nx = y, x
 
+    # infinite loop to get user's input constantly
     while True:
 
         user_key = stdscr.getch()
