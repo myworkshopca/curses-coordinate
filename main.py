@@ -38,7 +38,7 @@ def window(stdscr):
         stdscr.addstr(y, 3, chr(9474))
         if y % 10 == 0:
             y_str = str(y)
-            stdscr.addstr(y, 3 - len(y_str), y_str)
+            stdscr.addstr(y, 1, y_str)
     # paint the ending ▼ 9660
     stdscr.addstr(sh - 1, 3, chr(9660))
 
