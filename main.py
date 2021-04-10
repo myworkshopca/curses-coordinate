@@ -19,9 +19,9 @@ def window(stdscr):
     stdscr.addstr(3, 2, "3")
 
     # paint the x axis scale
-    for x in range(4, sw):
+    for x in range(1, sw):
         # ─ 9472
-        stdscr.addstr(3, x, chr(9472))
+        stdscr.addstr(1, x, chr(9472))
         # only paint the 10s scale.
         if x % 10 == 0:
             # conver the x-axis to string
@@ -29,11 +29,13 @@ def window(stdscr):
             # paint the x axis scale.
             for i in range(0, len(x_str)):
                 stdscr.addstr(3 - 1 - i, x, x_str[len(x_str) - 1 - i])
+            # paint the measure mark.
+            stdscr.addstr(1, x, chr(9516))
     # paint the ending arrow 9658 - ►
-    stdscr.addstr(3, sw - 1, chr(9658))
+    stdscr.addstr(0, sw - 1, chr(9658))
 
     # paint the y axis scale
-    for y in range(4, sh):
+    for y in range(1, sh):
         # │ 9474
         stdscr.addstr(y, 3, chr(9474))
         if y % 10 == 0:
