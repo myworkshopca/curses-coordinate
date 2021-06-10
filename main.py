@@ -7,7 +7,7 @@ def window(stdscr):
     # get size of the screen.
     sh, sw = stdscr.getmaxyx()
 
-    # ┌ 9484 ├ 9500 ┴ 9524 ┬ 9516┼ 
+    # ┌ 9484 ├ 9500 ┴ 9524 ┬ 9516 ┼ 9532
     # ─ 9472 │ 9474
     # ► 9658 ▼ 9660
     # more in page for box drawing unicode
